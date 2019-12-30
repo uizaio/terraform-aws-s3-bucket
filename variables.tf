@@ -14,9 +14,9 @@ variable "aws_region" {
   default     = "ap-southeast-1"
 }
 
-variable "bucket_notification_enable" {
+variable "bucket_notification" {
   description = "Control if S3 bucket event notification should be created"
-  type        = bool
+  type        = map(string)
   default     = false
 }
 
