@@ -230,8 +230,8 @@ resource "aws_s3_bucket_notification" "this" {
 
   dynamic "queue" {
     content {
-      queue_arn     = lookup(sqs_notify.value, "queue_arn", null)
-      events        = lookup(sqs_notify.value, "events", null)
+      queue_arn     = sqs_notify.value.queue_arn
+      events        = sqs_notify.value.events
       filter_prefix = lookup(sqs_notify.value, "filter_prefix", null)
       filter_suffix = lookup(sqs_notify.value, "filter_suffix", null)
     }
