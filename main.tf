@@ -224,6 +224,21 @@ resource "aws_s3_bucket_policy" "this" {
   policy = var.attach_elb_log_delivery_policy ? data.aws_iam_policy_document.elb_log_delivery[0].json : var.policy
 }
 
+resource "aws_s3_bucket_notification" "this" {
+  count  = var.create_bucket && (var.bucket_notification.enabled) ? 1 : 0
+  bucket = aws_s3_bucket.this[0].id
+
+  dynamic "queue" {
+    for_each = length(keys(var.bucket_notification)) == 0 ? [] : [var.bucket_notification]
+    content {
+      queue_arn     = lookup(queue.value, "queue_arn", null)
+      events        = lookup(queue.value, "events", null)
+      filter_prefix = lookup(queue.value, "filter_prefix", null)
+      filter_suffix = lookup(queue.value, "filter_suffix", null)
+    }
+  }
+}
+
 # AWS Load Balancer access log delivery policy
 data "aws_elb_service_account" "this" {
   count = var.create_bucket && var.attach_elb_log_delivery_policy ? 1 : 0
