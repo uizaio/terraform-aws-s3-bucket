@@ -1,17 +1,23 @@
 variable "account_id" {
   description = "TThe account that we will assume to"
-  type = string
+  type        = string
 }
 
 variable "role_name" {
   description = "The role we will assume to"
-  type = string
+  type        = string
 }
 
 variable "aws_region" {
   description = "AWS region"
-  type = string
-  default = "ap-southeast-1"
+  type        = string
+  default     = "ap-southeast-1"
+}
+
+variable "bucket_notification_enable" {
+  description = "Control if S3 bucket event notification should be created"
+  type        = bool
+  default     = false
 }
 
 variable "create_bucket" {
