@@ -231,10 +231,10 @@ resource "aws_s3_bucket_notification" "this" {
   dynamic "queue" {
     for_each = length(keys(var.bucket_notification)) == 0 ? [] : [var.bucket_notification]
     content {
-      queue_arn     = lookup(bucket_notification.value, "queue_arn", null)
-      events        = lookup(bucket_notification.value, "events", null)
-      filter_prefix = lookup(bucket_notification.value, "filter_prefix", null)
-      filter_suffix = lookup(bucket_notification.value, "filter_suffix", null)
+      queue_arn     = lookup(queue.value, "queue_arn", null)
+      events        = lookup(queue.value, "events", null)
+      filter_prefix = lookup(queue.value, "filter_prefix", null)
+      filter_suffix = lookup(queue.value, "filter_suffix", null)
     }
   }
 }
