@@ -17,7 +17,7 @@ variable "aws_region" {
 variable "bucket_notification" {
   description = "Control if S3 bucket event notification should be created"
   type        = map(string)
-  default     = false
+  default     = {}
 }
 
 variable "create_bucket" {
