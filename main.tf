@@ -225,11 +225,11 @@ resource "aws_s3_bucket_policy" "this" {
 }
 
 resource "aws_s3_bucket_notification" "this" {
-  count  = var.create_bucket ? 1 : 0
+  count  = var.create_bucket && var.bucket_notification ? 1 : 0
   bucket = aws_s3_bucket.this[0].id
 
   dynamic "queue" {
-    for_each = var.bucket_notification
+    for_each = var.queue_notification
     content {
       queue_arn     = queue.value.queue_arn
       events        = queue.value.events
