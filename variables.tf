@@ -20,8 +20,8 @@ variable "bucket_notification" {
   default     = false
 }
 variable "queue_notification" {
-  description = "Control if S3 bucket event notification should be created"
-  type        = map(string) # should be `map`, but it produces an error "all map elements must have the same type"
+  description = "Describe the queue to send the notification to"
+  type        = any # should be `map`, but it produces an error "all map elements must have the same type"
   default     = {}
 }
 
