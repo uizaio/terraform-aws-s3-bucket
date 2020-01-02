@@ -225,16 +225,16 @@ resource "aws_s3_bucket_policy" "this" {
 }
 
 resource "aws_s3_bucket_notification" "this" {
-  count  = var.create_bucket && (var.bucket_notification.enabled) ? 1 : 0
+  count  = var.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.this[0].id
 
   dynamic "queue" {
-    for_each = length(keys(var.bucket_notification)) == 0 ? [] : [var.bucket_notification]
+    for_each = var.bucket_notification
     content {
-      queue_arn     = lookup(queue.value, "queue_arn", null)
-      events        = lookup(queue.value, "events", null)
-      filter_prefix = lookup(queue.value, "filter_prefix", null)
-      filter_suffix = lookup(queue.value, "filter_suffix", null)
+      queue_arn     = queue.value.queue_arn
+      events        = queue.value.events
+      filter_prefix = queue.value.filter_prefix
+      filter_suffix = queue.value.filter_suffix
     }
   }
 }
