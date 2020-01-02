@@ -225,7 +225,7 @@ resource "aws_s3_bucket_policy" "this" {
 }
 
 resource "aws_s3_bucket_notification" "this" {
-  count  = var.create_bucket && var.bucket_notification ? 1 : 0
+  count  = var.create_bucket && (var.bucket_notification == true) ? 1 : 0
   bucket = aws_s3_bucket.this[0].id
 
   dynamic "queue" {
