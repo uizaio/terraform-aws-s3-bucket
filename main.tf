@@ -232,7 +232,7 @@ resource "aws_s3_bucket_notification" "this" {
     for_each = var.queue_notification
     content {
       queue_arn     = queue.value.queue_arn
-      events        = queue.value.events
+      events        = lookup(queue.value, "events", null)
       filter_prefix = queue.value.filter_prefix
       filter_suffix = queue.value.filter_suffix
     }
