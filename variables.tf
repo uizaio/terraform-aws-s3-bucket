@@ -15,7 +15,12 @@ variable "aws_region" {
 }
 
 variable "bucket_notification" {
-  description = "Control if S3 bucket event notification should be created"
+  description = "Decide whether to enable bucket notification events"
+  type        = bool
+  default     = false
+}
+variable "queue_notification" {
+  description = "Describe the queue to send the notification to"
   type        = any # should be `map`, but it produces an error "all map elements must have the same type"
   default     = {}
 }
