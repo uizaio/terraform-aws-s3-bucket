@@ -237,6 +237,16 @@ resource "aws_s3_bucket_notification" "this" {
       filter_suffix = lookup(queue.value, "filter_suffix", null)
     }
   }
+
+  dynamic "lambda_function" {
+    for_each = var.lambda_notification
+    content {
+      lambda_function_arn = lookup(lambda_function.value, "lambda_function_arn", null)
+      events              = lookup(lambda_function.value, "events", null)
+      filter_prefix       = lookup(lambda_function.value, "filter_prefix", null)
+      filter_suffix       = lookup(lambda_function.value, "filter_suffix", null)
+    }
+  }
 }
 
 # AWS Load Balancer access log delivery policy
