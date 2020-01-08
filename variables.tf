@@ -19,8 +19,15 @@ variable "bucket_notification" {
   type        = bool
   default     = false
 }
+
 variable "queue_notification" {
   description = "Describe the queue to send the notification to"
+  type        = any # should be `map`, but it produces an error "all map elements must have the same type"
+  default     = {}
+}
+
+variable "lambda_notification" {
+  description = "Describe the lambda functionp to send the notification to"
   type        = any # should be `map`, but it produces an error "all map elements must have the same type"
   default     = {}
 }
