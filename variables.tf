@@ -31,6 +31,7 @@ variable "lambda_notification" {
   type        = any # should be `map`, but it produces an error "all map elements must have the same type"
   default     = {}
 }
+
 variable "create_bucket" {
   description = "Controls if S3 bucket should be created"
   type        = bool
