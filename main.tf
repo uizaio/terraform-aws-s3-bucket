@@ -249,6 +249,26 @@ resource "aws_s3_bucket_notification" "this" {
   }
 }
 
+resource "aws_s3_bucket_inventory" "this" {
+  count  = var.create_bucket && (var.bucket_inventory == true) ? 1 : 0
+  bucket = aws_s3_bucket.this[0].id
+
+  name = "bucketHistory"
+
+  included_object_versions = "Current"
+
+  schedule {
+    frequency = "Daily"
+  }
+
+  destination {
+    bucket {
+      format     = "CSV"
+      bucket_arn = var.bucket_inventory_arn
+    }
+  }
+}
+
 # AWS Load Balancer access log delivery policy
 data "aws_elb_service_account" "this" {
   count = var.create_bucket && var.attach_elb_log_delivery_policy ? 1 : 0

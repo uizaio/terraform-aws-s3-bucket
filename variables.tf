@@ -4,6 +4,18 @@ variable "bucket_notification" {
   default     = false
 }
 
+variable "bucket_inventory" {
+  description = "Decide whether bucket inventory should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "bucket_inventory_arn" {
+  description = "(Optional) Describe the arn of the bucket that will store the inventory data"
+  type        = string
+  default     = null
+}
+
 variable "queue_notification" {
   description = "Describe the queue to send the notification to"
   type        = any # should be `map`, but it produces an error "all map elements must have the same type"
