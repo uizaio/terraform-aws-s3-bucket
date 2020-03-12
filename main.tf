@@ -261,6 +261,8 @@ resource "aws_s3_bucket_inventory" "this" {
     frequency = "Daily"
   }
 
+  optional_fields = ["Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "IntelligentTieringAccessTier"]
+
   destination {
     bucket {
       format     = "CSV"
