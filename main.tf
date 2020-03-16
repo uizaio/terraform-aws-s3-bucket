@@ -253,7 +253,7 @@ resource "aws_s3_bucket_inventory" "this" {
   count  = var.create_bucket && (var.bucket_inventory == true) ? 1 : 0
   bucket = aws_s3_bucket.this[0].id
 
-  name = "bucketHistory"
+  name = "inventory"
 
   included_object_versions = "Current"
 
