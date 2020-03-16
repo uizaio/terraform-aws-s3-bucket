@@ -16,6 +16,12 @@ variable "bucket_inventory_arn" {
   default     = null
 }
 
+variable "bucket_inventory_prefix" {
+  description = "(Optional) Which prefix will be append to inventory results"
+  type        = string
+  default     = "inventory"
+}
+
 variable "queue_notification" {
   description = "Describe the queue to send the notification to"
   type        = any # should be `map`, but it produces an error "all map elements must have the same type"

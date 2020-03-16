@@ -267,6 +267,7 @@ resource "aws_s3_bucket_inventory" "this" {
     bucket {
       format     = "CSV"
       bucket_arn = var.bucket_inventory_arn
+      prefix     = var.bucket_inventory_prefix
     }
   }
 }
